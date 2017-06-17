@@ -3,6 +3,10 @@ package main
 import (
     "github.com/gin-gonic/gin"
     "os"
+    "sync"
+    "time"
+    "log"
+    "math"
 )
 
 var healthy = true
@@ -43,6 +47,8 @@ func main(){
 /******************* End MAIN Function **************/
 
 
+
+
 func thrash(c *gin.Context){
     var wg sync.WaitGroup
     start := time.Now()
@@ -54,4 +60,12 @@ func thrash(c *gin.Context){
     elapsed := time.Since(start)
     log.Printf("Runtime took %s", elapsed)
     c.String(200,"OK")
+}
+
+func sqrt(wg *sync.WaitGroup) {
+        defer wg.Done()
+        x := 0.0001
+        for i := 0; i <= 4000000000; i++ {
+                x += math.Sqrt(x)
+        }
 }
