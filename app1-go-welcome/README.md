@@ -1,0 +1,1 @@
+# Sample go Application
